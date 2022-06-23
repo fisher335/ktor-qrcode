@@ -34,7 +34,7 @@ fun Application.configureRouting() {
     }
 }
 
-fun createQRcode(content: String): String {
+fun createQRcode(url: String): String {
     var config = QrConfig(300, 300)
     // 设置边距，既二维码和背景之间的边距
 //    config.setMargin(3);
@@ -44,7 +44,7 @@ fun createQRcode(content: String): String {
 //    config.setBackColor(Color.GRAY)
     val uuid = UUID.randomUUID().toString().replace("-", "")
     println("$QR_PATH/$uuid.png")
-    QrCodeUtil.generate("nihao", config, File("$STATIC_PATH/qrcode/$uuid.png"))
+    QrCodeUtil.generate(url, config, File("$STATIC_PATH/qrcode/$uuid.png"))
     return "$uuid.png"
 }
 
