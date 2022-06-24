@@ -1,9 +1,10 @@
 plugins {
     id 'application'
     id 'org.jetbrains.kotlin.jvm' version '1.7.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-group "com.example"
+group "com.wish"
 version "0.0.1"
 mainClassName = "io.ktor.server.netty.EngineMain"
 
@@ -14,7 +15,12 @@ repositories {
     mavenCentral()
     maven { url "https://maven.pkg.jetbrains.space/public/p/ktor/eap" }
 }
-
+// 这个task会生成fat JAR 并会将其放在 ./build/libs/ directory目录下
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
 dependencies {
     implementation "io.ktor:ktor-server-core-jvm:$ktor_version"
     implementation "io.ktor:ktor-server-content-negotiation-jvm:$ktor_version"
@@ -27,3 +33,4 @@ dependencies {
     testImplementation "io.ktor:ktor-server-tests-jvm:$ktor_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
+

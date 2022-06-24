@@ -5,7 +5,6 @@ import cn.hutool.core.io.FileUtil
 import cn.hutool.extra.qrcode.QrCodeUtil
 import cn.hutool.extra.qrcode.QrConfig
 import com.example.config.QR_PATH
-import com.example.config.STATIC_PATH
 import com.example.entity.FileInfo
 import java.io.File
 import java.text.DecimalFormat
@@ -43,7 +42,7 @@ object FileUtils {
 //    config.setBackColor(Color.GRAY)
         val uuid = UUID.randomUUID().toString().replace("-", "")
         println("$QR_PATH/$uuid.png")
-        QrCodeUtil.generate(url, config, File("$STATIC_PATH/qrcode/$uuid.png"))
+        QrCodeUtil.generate(url, config, File("$QR_PATH/$uuid.png"))
         return "$uuid.png"
     }
 

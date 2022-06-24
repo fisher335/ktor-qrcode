@@ -78,7 +78,7 @@ class ResponseResult<T> : Serializable {
             return result.ok(code, null, msg)
         }
 
-        fun okResult(data: Any): ResponseResult<*> {
+        fun okResult(data: Any?): ResponseResult<*> {
             val result = setAppHttpCodeEnum(AppHttpCodeEnum.SUCCESS, AppHttpCodeEnum.SUCCESS.msg)
             if (data != null) {
                 result.data = data
