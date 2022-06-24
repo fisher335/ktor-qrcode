@@ -2,8 +2,11 @@ package com.example.plugins
 
 import cn.hutool.extra.qrcode.QrCodeUtil
 import cn.hutool.extra.qrcode.QrConfig
+import com.example.config.FILE_PATH
 import com.example.config.QR_PATH
 import com.example.config.STATIC_PATH
+import com.example.utils.FileUtils
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.response.*
@@ -26,25 +29,13 @@ fun Application.configureRouting() {
         }
         route("/qrcode") {
             get {
-                val qrcodeString: String? = call.request.queryParameters["qrcode"]
-                val fileName = qrcodeString?.let { it1 -> createQRcode(it1) }
-                call.respond(mapOf("fileName" to fileName))
+                val qrcodeString: String? = call.request.queryParameters["url"]
+                val fileName = qrcodeString?.let { it1 -> FileUtils.createQRcode(it1) }
+                call.respond(mapOf("data" to fileName))
             }
         }
+
     }
 }
 
-fun createQRcode(url: String): String {
-    var config = QrConfig(300, 300)
-    // 设置边距，既二维码和背景之间的边距
-//    config.setMargin(3);
-    // 设置前景色，既二维码颜色（青色）
-//    config.setForeColor(Color.BLUE)
-//    // 设置背景色（灰色）
-//    config.setBackColor(Color.GRAY)
-    val uuid = UUID.randomUUID().toString().replace("-", "")
-    println("$QR_PATH/$uuid.png")
-    QrCodeUtil.generate(url, config, File("$STATIC_PATH/qrcode/$uuid.png"))
-    return "$uuid.png"
-}
 
