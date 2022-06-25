@@ -61,8 +61,11 @@ suspend fun fileSave(multipartData: MultiPartData): String {
             }
             is PartData.FileItem -> {
                 fileName = part.originalFileName as String
-                var fileBytes = part.streamProvider().readBytes()
-                File("$FILE_PATH/$fileName").writeBytes(fileBytes)
+                withContext(Dispatchers.IO) {
+                    val fileBytes = part.streamProvider().readBytes()
+
+                    File("$FILE_PATH/$fileName").writeBytes(fileBytes)
+                }
             }
             else -> {}
         }

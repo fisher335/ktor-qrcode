@@ -13,5 +13,4 @@ fun Application.module() {
     configureRouting()
     fileRouting()
     configureSerialization()
-
 }
