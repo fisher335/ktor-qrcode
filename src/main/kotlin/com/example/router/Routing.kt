@@ -1,26 +1,25 @@
 package com.example.plugins
 
-import cn.hutool.extra.qrcode.QrCodeUtil
-import cn.hutool.extra.qrcode.QrConfig
-import com.example.config.FILE_PATH
-import com.example.config.QR_PATH
 import com.example.config.STATIC_PATH
 import com.example.utils.FileUtils
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.io.*
-import java.util.*
+import java.io.File
 
-
+/**
+ * 主要的一些路由配置
+ *
+ */
 fun Application.configureRouting() {
 
     routing {
         route("/") {
             get { call.respondText("Hello World!") }
         }
+
+        /*主要是用来设置静态文件的*/
 
         static("static") {
             staticRootFolder = File(STATIC_PATH)

@@ -14,6 +14,10 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.net.URLEncoder
 
+/**
+ * 文件相关的路由设置在扩展方法里面
+ *
+ */
 fun Application.fileRouting() {
     routing {
         route("/file") {
@@ -50,7 +54,12 @@ fun Application.fileRouting() {
     }
 }
 
-
+/**
+ *
+ *
+ * @param multipartData
+ * @return fileNAme
+ */
 suspend fun fileSave(multipartData: MultiPartData): String {
     var fileDescription = ""
     var fileName = ""
