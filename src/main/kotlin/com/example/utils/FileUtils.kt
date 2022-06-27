@@ -10,6 +10,14 @@ import java.io.File
 import java.text.DecimalFormat
 import java.util.*
 
+/**
+ **
+ * @Description: 静态工具类
+ * @Param:
+ * @return:
+ * @Author: phoenix
+ * @Date: 2022/6/27
+ */
 object FileUtils {
 
     fun getSize(i: Long): String {
@@ -27,19 +35,21 @@ object FileUtils {
         } else if (i >= kb) {
             String.format("%.2f", i.toFloat() / kb) + "KB"
         } else {
-            i.toString() + "B"
+            "$i B"
         }
         return result
     }
 
     fun createQRcode(url: String): String {
         var config = QrConfig(300, 300)
-        // 设置边距，既二维码和背景之间的边距
-//    config.setMargin(3);
-        // 设置前景色，既二维码颜色（青色）
-//    config.setForeColor(Color.BLUE)
-//    // 设置背景色（灰色）
-//    config.setBackColor(Color.GRAY)
+        /*
+         设置边距，既二维码和背景之间的边距
+            config.setMargin(3);
+         设置前景色，既二维码颜色（青色）
+            config.setForeColor(Color.BLUE)
+           设置背景色（灰色）
+            config.setBackColor(Color.GRAY)
+        */
         val uuid = UUID.randomUUID().toString().replace("-", "")
         println("$QR_PATH/$uuid.png")
         QrCodeUtil.generate(url, config, File("$QR_PATH/$uuid.png"))
@@ -52,8 +62,8 @@ object FileUtils {
         for (file in files) {
             var fileOne = FileInfo(file.name)
             fileOne.date = DateUtil.date(file.lastModified()).toString()
-            fileOne.size = FileUtils.getSize(file.length())
-            fileOne.url =  "/${file.name}"
+            fileOne.size = getSize(file.length())
+            fileOne.url = "/${file.name}"
             fileInfoList.add(fileOne)
         }
         return fileInfoList
