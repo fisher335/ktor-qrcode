@@ -15,25 +15,12 @@ import java.io.File
 fun Application.configureRouting() {
 
     routing {
-        route("/") {
-            get { call.respondText("Hello World!") }
-        }
-
         /*主要是用来设置静态文件的*/
-
-        static("static") {
+        static("/static") {
             staticRootFolder = File(STATIC_PATH)
             files("qrcode")
             files("file")
         }
-        route("/qrcode") {
-            get {
-                val qrcodeString: String? = call.request.queryParameters["url"]
-                val fileName = qrcodeString?.let { it1 -> FileUtils.createQRcode(it1) }
-                call.respond(mapOf("data" to fileName))
-            }
-        }
-
     }
 }
 
