@@ -1,6 +1,7 @@
 package com.example.router
 
 import com.example.utils.FileUtils
+import com.example.utils.param
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -8,7 +9,8 @@ import io.ktor.server.routing.*
 fun Application.QrRouting() {
     routing {
         get("/") {
-            call.respondText("Hello World!")
+            val params: String = call.param("url")
+            call.respondText(params)
         }
         get("/qrcode") {
             val qrcodeString: String? = call.request.queryParameters["url"]

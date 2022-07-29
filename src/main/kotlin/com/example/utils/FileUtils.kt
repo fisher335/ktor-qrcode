@@ -60,7 +60,7 @@ object FileUtils {
         val files = FileUtil.loopFiles(path)
         var fileInfoList = mutableListOf<FileInfo>()
         for (file in files) {
-            var fileOne = FileInfo(file.name)
+            val fileOne = FileInfo(file.name)
             fileOne.date = DateUtil.date(file.lastModified()).toString()
             fileOne.size = getSize(file.length())
             fileOne.url = "/${file.name}"
@@ -69,4 +69,15 @@ object FileUtils {
         return fileInfoList
     }
 
+
+}
+
+fun getFileSequence(path: String, p: (File) -> Boolean): Sequence<File> {
+    val f = File(path)
+    return f.walk().filter(p)
+}
+
+fun main() {
+    val a = getFileSequence("d:/temp") { it.isFile }
+    a.forEach { file -> println(file.name + file.lastModified() + file.extension + file.length()) }
 }
