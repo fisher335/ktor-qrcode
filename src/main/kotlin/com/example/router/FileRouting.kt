@@ -34,23 +34,20 @@ fun Application.fileRouting() {
             val filename = fileSave(multipart)
             call.respond(ResponseResult.okResult(filename))
         }
-        route("/filedown/{file}") {
-            get {
-                val fileName: String? = call.parameters["file"]
-                val file = File("$FILE_PATH/$fileName")
-                call.response.header(
-                    HttpHeaders.ContentDisposition,
-                    ContentDisposition.Attachment.withParameter(
-                        ContentDisposition.Parameters.FileName,
-                        withContext(Dispatchers.IO) {
-                            URLEncoder.encode(fileName, "UTF-8")
-                        }
-                    )
-                        .toString()
+        get("/filedown/{file}") {
+            val fileName: String? = call.parameters["file"]
+            val file = File("$FILE_PATH/$fileName")
+            call.response.header(
+                HttpHeaders.ContentDisposition,
+                ContentDisposition.Attachment.withParameter(
+                    ContentDisposition.Parameters.FileName,
+                    withContext(Dispatchers.IO) {
+                        URLEncoder.encode(fileName, "UTF-8")
+                    }
+                ).toString()
                 )
                 call.respondFile(file)
             }
-        }
     }
 }
 
