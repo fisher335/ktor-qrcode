@@ -20,6 +20,7 @@ fun Application.configureRouting() {
             staticRootFolder = File(STATIC_PATH)
             files("qrcode")
             files("file")
+            resource(".")
         }
     }
 }

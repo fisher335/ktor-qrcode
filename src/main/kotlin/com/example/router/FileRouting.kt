@@ -1,8 +1,8 @@
 package com.example.router
 
 import com.example.config.FILE_PATH
-import com.example.entity.ResponseResult
 import com.example.utils.FileUtils
+import com.example.utils.jsonOk
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
@@ -32,7 +32,7 @@ fun Application.fileRouting() {
         post("/upload") {
             val multipart = call.receiveMultipart()
             val filename = fileSave(multipart)
-            call.respond(ResponseResult.okResult(filename))
+            call.jsonOk("success", filename)
         }
         get("/filedown/{file}") {
             val fileName: String? = call.parameters["file"]
