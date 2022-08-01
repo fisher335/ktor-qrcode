@@ -1,8 +1,10 @@
 package com.example.router
 
 import com.example.config.FILE_PATH
+import com.example.entity.FileInfo
 import com.example.utils.FileUtils
 import com.example.utils.jsonOk
+import com.example.utils.param
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
@@ -20,14 +22,13 @@ import java.net.URLEncoder
  */
 fun Application.fileRouting() {
     routing {
-        route("/file") {
-            get {
-                val fileInfos = FileUtils.getFileList(FILE_PATH)
-                call.respond(fileInfos)
+        get("/file") {
+            val search = call.param("search").trim()
+            var fileInfos = FileUtils.getFileList(FILE_PATH)
+            if (search.isNotEmpty()) {
+                fileInfos = fileInfos.filter { it.name.contains(search, ignoreCase = true) } as MutableList<FileInfo>
             }
-            post {
-
-            }
+            call.respond(fileInfos)
         }
         post("/upload") {
             val multipart = call.receiveMultipart()
@@ -45,9 +46,9 @@ fun Application.fileRouting() {
                         URLEncoder.encode(fileName, "UTF-8")
                     }
                 ).toString()
-                )
-                call.respondFile(file)
-            }
+            )
+            call.respondFile(file)
+        }
     }
 }
 

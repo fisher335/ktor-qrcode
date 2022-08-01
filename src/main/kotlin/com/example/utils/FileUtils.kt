@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil
 import cn.hutool.core.io.FileUtil
 import cn.hutool.extra.qrcode.QrCodeUtil
 import cn.hutool.extra.qrcode.QrConfig
+import com.example.config.FILE_PATH
 import com.example.config.QR_PATH
 import com.example.entity.FileInfo
 import java.io.File
@@ -78,6 +79,10 @@ fun getFileSequence(path: String, p: (File) -> Boolean): Sequence<File> {
 }
 
 fun main() {
-    val a = getFileSequence("d:/temp") { it.isFile }
-    a.forEach { file -> println(file.name + file.lastModified() + file.extension + file.length()) }
+    val search = "k"
+    var fileInfos = FileUtils.getFileList(FILE_PATH)
+    if (search.length > 1) {
+        fileInfos = fileInfos.filter { it.name.contains(search, ignoreCase = true) } as MutableList<FileInfo>
+    }
+    println(fileInfos)
 }
