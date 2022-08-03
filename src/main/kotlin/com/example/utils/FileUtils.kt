@@ -86,7 +86,7 @@ fun getFileSequence(path: String, p: (File) -> Boolean): Sequence<File> {
 fun main() {
     val search = "k"
     var fileInfos = FileUtils.getFileList(FILE_PATH)
-    if (search.length > 1) {
+    if (search.isEmpty()) {
         fileInfos = fileInfos.filter { it.name.contains(search, ignoreCase = true) } as MutableList<FileInfo>
     }
     println(fileInfos)
