@@ -49,6 +49,15 @@ fun Application.fileRouting() {
             )
             call.respondFile(file)
         }
+        post("/delete") {
+            val postParameters = call.receiveParameters()
+            val filename = postParameters["name"] ?: ""
+            val password = postParameters["password"] ?: ""
+            if (password.equals("ddc", true)) {
+                FileUtils.delFileByName(filename)
+            }
+            call.jsonOk("del success", filename)
+        }
     }
 }
 

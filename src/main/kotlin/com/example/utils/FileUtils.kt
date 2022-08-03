@@ -70,6 +70,11 @@ object FileUtils {
         return fileInfoList
     }
 
+//    按照名称删除文件
+suspend fun delFileByName(name: String) {
+    var filePath = "$FILE_PATH/$name"
+    FileUtil.del(filePath)
+}
 
 }
 
