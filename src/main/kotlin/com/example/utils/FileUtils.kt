@@ -7,6 +7,8 @@ import cn.hutool.extra.qrcode.QrConfig
 import com.example.config.FILE_PATH
 import com.example.config.QR_PATH
 import com.example.entity.FileInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.text.DecimalFormat
 import java.util.*
@@ -73,7 +75,9 @@ object FileUtils {
 //    按照名称删除文件
 suspend fun delFileByName(name: String) {
     var filePath = "$FILE_PATH/$name"
-    FileUtil.del(filePath)
+    withContext(Dispatchers.IO) {
+        FileUtil.del(filePath)
+    }
 }
 
 }
