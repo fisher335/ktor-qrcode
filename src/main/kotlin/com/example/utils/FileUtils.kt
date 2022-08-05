@@ -94,4 +94,5 @@ fun main() {
         fileInfos = fileInfos.filter { it.name.contains(search, ignoreCase = true) } as MutableList<FileInfo>
     }
     println(fileInfos)
+
 }

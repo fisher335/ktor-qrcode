@@ -10,9 +10,8 @@ import io.ktor.server.routing.*
 fun Application.qrRouting() {
     routing {
         get("/") {
-            val params: String = call.param("url")
-//            call.respondText("------$params----")
-            call.jsonOk("suce", null)
+            val params: String? = call.param("url")
+            call.jsonOk("success", mapOf("url" to params).toString())
         }
         get("/qrcode") {
             val qrcodeString: String? = call.request.queryParameters["url"]
