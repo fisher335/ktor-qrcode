@@ -11,27 +11,35 @@ import io.ktor.server.response.*
 data class ResponseErrorResult(val code: Int, val msg: String, val errMsg: String? = null, val errCode: Int = 0)
 
 // 200 成功 | 失败
-data class Response200Result<T: Any>(val code: Int = 200, val msg: String = "success", val errCode: Int = 0, val state: Boolean = false, val data: T? = null)
+data class Response200Result<T : Any>(
+    val code: Int = 200,
+    val msg: String = "success",
+    val errCode: Int = 0,
+    val state: Boolean = false,
+    val data: T? = null
+)
 
 
 // 所有异常返回模板
-suspend fun ApplicationCall.jsonError(code: HttpStatusCode, msg: String, errMsg: String? = null, errCode: Int = 0){
-    respond(code, ResponseErrorResult(
-        code.value,
-        msg,
-        errMsg,
-        errCode
-    ))
+suspend fun ApplicationCall.jsonError(code: HttpStatusCode, msg: String, errMsg: String? = null, errCode: Int = 0) {
+    respond(
+        code, ResponseErrorResult(
+            code.value,
+            msg,
+            errMsg,
+            errCode
+        )
+    )
 }
 
 // 200 - success
-suspend fun <T: Any>ApplicationCall.jsonOk(msg: String, data: T? = null) {
-    respond(Response200Result(200, msg, 0, true, data=data))
+suspend fun <T : Any> ApplicationCall.jsonOk(msg: String, data: T? = null) {
+    respond(Response200Result(200, msg, 0, true, data = data))
 }
 
 // 200 - error
-suspend fun ApplicationCall.jsonErr(msg: String, errCode: Int = 0){
-    respond(Response200Result(200, msg, errCode, false, data=null))
+suspend fun ApplicationCall.jsonErr(msg: String, errCode: Int = 0) {
+    respond(Response200Result(200, msg, errCode, false, data = null))
 }
 
 // 500

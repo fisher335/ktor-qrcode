@@ -29,12 +29,12 @@ fun Application.configureException() {
 }
 
 // 获取异常全部信息
-private fun getMessage(err: Throwable):String {
+private fun getMessage(err: Throwable): String {
     val strBuffer = StringBuffer("${err.message}\n")
     for (se in err.stackTrace) {
         strBuffer.append("\tat ${se.className}(${se.fileName}:${se.lineNumber})\n")
     }
-    strBuffer.deleteCharAt(strBuffer.length -1)
+    strBuffer.deleteCharAt(strBuffer.length - 1)
     strBuffer.append("}")
     return strBuffer.toString()
 }

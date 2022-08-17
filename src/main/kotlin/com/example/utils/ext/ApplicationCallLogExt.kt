@@ -16,22 +16,31 @@ private fun ApplicationCall.logStr(): String {
 }
 
 fun ApplicationCall.info(msg: String) = this.application.environment.log.info(msg)
-fun ApplicationCall.info(format: String, vararg arguments: Any) = this.application.environment.log.info(format, *arguments)
+fun ApplicationCall.info(format: String, vararg arguments: Any) =
+    this.application.environment.log.info(format, *arguments)
+
 fun ApplicationCall.info(msg: String, t: Throwable) = this.application.environment.log.info(msg, t)
 
 fun ApplicationCall.debug(msg: String) = this.application.environment.log.debug(msg)
-fun ApplicationCall.debug(format: String, vararg arguments: Any) = this.application.environment.log.debug(format, *arguments)
+fun ApplicationCall.debug(format: String, vararg arguments: Any) =
+    this.application.environment.log.debug(format, *arguments)
+
 fun ApplicationCall.debug(msg: String, t: Throwable) = this.application.environment.log.debug(msg, t)
 
 fun ApplicationCall.warn(msg: String) = this.application.environment.log.warn(msg)
-fun ApplicationCall.warn(format: String, vararg arguments: Any) = this.application.environment.log.warn(format, *arguments)
+fun ApplicationCall.warn(format: String, vararg arguments: Any) =
+    this.application.environment.log.warn(format, *arguments)
+
 fun ApplicationCall.warn(msg: String, t: Throwable) = this.application.environment.log.warn(msg, t)
 
 fun ApplicationCall.error(msg: String) {
     this.application.environment.log.error(msg)
     this.application.environment.log.error(this.logStr())
 }
-fun ApplicationCall.error(format: String, vararg arguments: Any) = this.application.environment.log.error(format, *arguments)
+
+fun ApplicationCall.error(format: String, vararg arguments: Any) =
+    this.application.environment.log.error(format, *arguments)
+
 fun ApplicationCall.error(msg: String, t: Throwable) = this.application.environment.log.error(msg, t)
 
 
