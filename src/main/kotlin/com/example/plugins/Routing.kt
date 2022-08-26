@@ -1,10 +1,11 @@
 package com.example.plugins
 
+import com.example.api.fileRouting
+import com.example.api.qrRouting
+import com.example.api.testRouting
 import com.example.config.STATIC_PATH
-import com.example.utils.FileUtils
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.io.File
 
@@ -22,6 +23,12 @@ fun Application.configureRouting() {
             files("file")
             resource(".")
         }
+        //文件上传相关路由
+        fileRouting()
+        //二维码相关路由
+        qrRouting()
+        //测试路由
+        testRouting()
     }
 }
 

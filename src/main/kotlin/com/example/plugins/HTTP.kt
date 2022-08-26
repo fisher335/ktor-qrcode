@@ -20,7 +20,8 @@ fun Application.configureHTTP() {
     }
 
     install(Sessions) {
-        cookie<MySession>("MySession") {
+        //需要注册Session，名称为Session
+        cookie<MySession>("Session") {
             cookie.extensions["SameSite"] = "lax"
         }
     }
