@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.plugins.configureHTTP
+import com.example.plugins.configureMonitoring
 import com.example.plugins.configureRouting
 import com.example.plugins.configureSerialization
 import com.example.router.fileRouting
@@ -14,6 +15,7 @@ fun Application.module() {
 //    系统默认配置
     configureHTTP()
     configureSerialization()
+    configureMonitoring()
 //    自定义路由配置
     configureRouting()
     fileRouting()

@@ -93,6 +93,9 @@ fun main() {
     if (search.isEmpty()) {
         fileInfos = fileInfos.filter { it.name.contains(search, ignoreCase = true) } as MutableList<FileInfo>
     }
-    println(fileInfos)
+//    println(fileInfos)
+
+    val a = getFileSequence(FILE_PATH) { it.isFile }
+    a.forEach { println(it) }
 
 }
