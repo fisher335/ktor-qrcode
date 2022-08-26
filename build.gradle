@@ -34,5 +34,6 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     implementation "io.ktor:ktor-server-status-pages:$ktor_version"
     implementation "io.ktor:ktor-server-call-logging:$ktor_version"
+    implementation 'io.ktor:ktor-server-sessions-jvm:2.0.2'
 }
 
