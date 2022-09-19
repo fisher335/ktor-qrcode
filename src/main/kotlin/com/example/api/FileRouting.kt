@@ -3,6 +3,7 @@ package com.example.api
 import com.example.config.FILE_PATH
 import com.example.entity.FileInfo
 import com.example.utils.FileUtils
+import com.example.utils.jsonErr
 import com.example.utils.jsonOk
 import com.example.utils.param
 import io.ktor.http.*
@@ -55,6 +56,8 @@ fun Route.fileRouting() {
         val password = postParameters["password"] ?: ""
         if (password.equals("ddc", true)) {
             FileUtils.delFileByName(filename)
+        } else {
+            call.jsonErr("密码错误")
         }
         call.jsonOk("del success", filename)
     }
